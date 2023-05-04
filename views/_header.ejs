@@ -1,0 +1,39 @@
+    <ul id="nav-bar">
+        <a href="/">  &lt;codeial&gt; </a>
+        <% if(locals.user){ %>
+            <div class="left-end">
+           <li>
+            <a href="/users/profile">
+                <%=user.name%>
+            </a>
+           </li>
+
+
+           <li>
+            <a href="/users/sign-out">
+                sign-out
+            </a>
+            </li>
+            </div>
+
+            <%} else{ %>
+
+                <div class="left-end">
+                <li>
+                <a href="/users/sign-in">
+                    Sign In
+                </a>
+                </li>
+
+            
+                <li>
+                <a href="/users/sign-up">
+                    Sign Up
+                </a>
+                </li>
+                </div>
+
+
+
+                <%}%>
+    </ul>

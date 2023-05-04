@@ -1,0 +1,25 @@
+{
+  "name": "codeial",
+  "version": "1.0.0",
+  "description": "This is all in one social app for coders",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sass-watch": "sass --no-source-map --watch assets/scss/:assets/css/"
+  },
+  "author": "Krishna",
+  "license": "ISC",
+  "dependencies": {
+    "connect-mongo": "^4.6.0",
+    "cookie-parser": "^1.4.6",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "express-ejs-layouts": "^2.5.1",
+    "express-session": "^1.17.3",
+    "mongoose": "^7.1.0",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0",
+    "sass": "^1.58.3"
+  }
+}

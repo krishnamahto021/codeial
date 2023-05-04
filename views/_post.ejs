@@ -1,0 +1,36 @@
+<li>
+    <p>
+        <%= post.content %>
+            <%= post.user.name %>
+    </p>
+    <!-- to show delete button only to logged in user and the user who created -->
+    <%if(locals.user.id && locals.user.id==post.user.id) { %>
+        <small>
+            <a href="/posts/destroy/<%=post.id%>">X</a>
+        </small>
+        <%}%>
+
+
+            <div class="post-comments">
+                <% if(locals.user) { %>
+                    <form action="/comments/create" method="post">
+                        <input type="text" name="content" placeholder="Type your comment...">
+                        <!-- to link user to post -->
+                        <input type="hidden" name="post" value="<%=post._id%>">
+                        <input type="submit" value="Add Comment">
+                    </form>
+                    <% } %>
+
+                        <div class="post-comments-list">
+                            <ul id="post-comments-<%=post._id%>">
+                                <% for(comment of post.comments) {%>
+                                    <%-include('_comment') -%>
+
+                                <% } %>
+                            </ul>
+
+                        </div>
+
+
+            </div>
+</li>

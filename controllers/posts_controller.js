@@ -1,0 +1,35 @@
+const Post = require('../models/post');
+const Comment = require('../models/comment');
+
+module.exports.create = async function(req,res){
+    const post = await Post.create({
+        content:req.body.content,
+        user:req.user.id
+        });
+
+        try{
+            return res.redirect('back');
+        }catch(err){
+            console.log('error in posting');
+        }
+}
+
+
+// to delete the post and all the comments related to it
+module.exports.destroy = async function(req,res){
+    const post = await Post.findById(req.params.id);
+    try{
+        // .id converts object id into string which makes us easy for comparison
+
+    if(post.user == req.user.id){ // to authenticate whether the one who is trying to delete post is same as the one who created the post
+        post.deleteOne();
+        // post.remove(); is not working
+        await Comment.deleteMany({post : req.params.id});
+    }
+    return res.redirect('back');
+}catch(err){
+    console.log('error in destroying post and its comment',err);
+    return res.redirect('back');
+}
+
+}
