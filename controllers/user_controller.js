@@ -1,10 +1,15 @@
 const User = require('../models/user');
 // to render profile page
-module.exports.profile = function(req,res){
-    
+module.exports.profile = async function(req,res){
+  try{
+    let user = await User.findById(req.params.id);    
     return res.render('user_profile',{
-        title:'users'
+        title:'users',
+        user_profile:user
     });
+  }catch(err){
+
+  }
 }
 
 // to render sign in page
@@ -55,6 +60,22 @@ module.exports.create = async function(req, res) {
     return;
   }
 };
+
+// to update user
+module.exports.update = async function(req,res){
+  try{
+    if(req.user.id == req.params.id){ // the user who is signed is same as the user who is trying to update details
+      let user = await User.findByIdAndUpdate(req.params.id,{
+        name:req.body.name,
+        email:req.body.email
+      });
+      return res.redirect('back');
+    }
+
+  }catch(err){
+    window.alert('Nikal Lawde!!');
+  }
+}
 
 
 

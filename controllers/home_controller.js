@@ -1,4 +1,5 @@
 const Post = require('../models/post');
+const User = require('../models/user');
 
 //populate the user of each post
 module.exports.home = async function (req, res) {
@@ -12,10 +13,12 @@ module.exports.home = async function (req, res) {
     })
 
     try {
+        let users = await User.find({});
 
         return res.render('home', {
             title: "Codeial | Home",
-            posts:posts
+            posts:posts,
+            all_users:users
         })
 
     }catch(err){

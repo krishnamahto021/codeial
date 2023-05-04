@@ -3,13 +3,19 @@ const userController = require('../controllers/user_controller');
 const passport = require('passport');
 
 const router = express.Router();
-router.get('/profile',passport.checkAuthentication,userController.profile);
+
+// to show the users
+router.get('/profile/:id',passport.checkAuthentication,userController.profile);
+
+// to update the user
+router.post('/update/:id',passport.checkAuthentication,userController.update);
 
 // to route the sign up and sign in page
 router.get('/sign-up',userController.signUp);
 router.get('/sign-in',userController.signIn);
 
 router.post('/create',userController.create);
+
 
 
 // use passport as middleware to authenticate the user
