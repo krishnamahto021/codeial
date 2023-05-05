@@ -63,6 +63,16 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(passport.setAuthenticatedUser);
 
+// we set the flash message just after the cookie session as flash messages are passsed with every cookie
+const flash = require('connect-flash');
+app.use(flash());
+
+
+// middleware so that for each req,res cycle we don't need to pass
+const customMware = require('./config/middleware');
+app.use(customMware.setFlash);
+
+
 
 // use route
 app.use('/',require('./routes')); // any request coming to the web will go to routes

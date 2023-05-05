@@ -13,6 +13,19 @@
 </head>
 <body>
         <%- include('_header'); %>
+
+        <!-- with help of custom middleware we now passed the request and finally shown in the page  -->
+        <% if(flash.success && flash.success.length > 0) {%>
+            <h5>
+                <%= flash.success %>
+            </h5>
+        
+        
+        <%}%>
+
+
+
+
         <%- body %>
         <%- include('_footer'); %>     
         

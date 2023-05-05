@@ -82,16 +82,14 @@ module.exports.update = async function(req,res){
 
 // to fetch data from sign in form
 module.exports.createSession = function(req,res){
+  req.flash('success','Logged in successfully!!');
   return res.redirect('/');
     
 }
 
 // to signout
 module.exports.destroySession = function(req,res){
-  req.logout(function(err){
-    if(err){
-      console.log('error in logging out ')
-    }
-  });
+  req.logout();
+  req.flash('success','Logged out successfully!!');
   return res.redirect('/');
 }
