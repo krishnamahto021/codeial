@@ -8,9 +8,11 @@ module.exports.create = async function(req,res){
         });
 
         try{
+            req.flash('success','Posted! successfully')
             return res.redirect('back');
         }catch(err){
-            console.log('error in posting');
+            // console.log('error in posting');
+            req.flash('error',err);
         }
 }
 
@@ -25,10 +27,12 @@ module.exports.destroy = async function(req,res){
         post.deleteOne();
         // post.remove(); is not working
         await Comment.deleteMany({post : req.params.id});
+        req.flash('success','Post and its associated comments deleted successfully!!')
     }
     return res.redirect('back');
 }catch(err){
-    console.log('error in destroying post and its comment',err);
+    // console.log('error in destroying post and its comment',err);
+    req.flash('error',err);
     return res.redirect('back');
 }
 

@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css" integrity="sha512-0p3K0H3S6Q4bEWZ/WmC94Tgit2ular2/n0ESdfEX8l172YyQj8re1Wu9s/HT9T/T2osUw5Gx/6pAZNk3UKbESw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js" integrity="sha512-lOrm9FgT1LKOJRUXF3tp6QaMorJftUjowOWiDcG5GFZ/q7ukof19V0HKx/GWzXCdt9zYju3/KhBNdCLzK8b90Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/layout.css">
     <link rel="stylesheet" href="/css/header.css">
@@ -15,13 +17,13 @@
         <%- include('_header'); %>
 
         <!-- with help of custom middleware we now passed the request and finally shown in the page  -->
-        <% if(flash.success && flash.success.length > 0) {%>
+        <!-- <% if(flash.success && flash.success.length > 0) {%>
             <h5>
                 <%= flash.success %>
             </h5>
         
         
-        <%}%>
+        <%}%> -->
 
 
 
@@ -31,5 +33,31 @@
         
         
      <%- script %>
+
+     <script>
+        <% if(flash.success && flash.success.length>0){%>
+            new Noty({
+                theme:'relax',
+                text:'<%=flash.success%>',
+                type:'success',
+                layout:'topRight',
+                timout:1500
+            }).show();    
+        <% } %>
+
+        <%if(flash.error && flash.error.length>0){%>
+            new Noty({
+                theme:'relax',
+                type:'<%=flash.error%>',
+                type:'error',
+                layout:'topRight',
+                timeout:1500
+
+            }).show();
+
+        <%}%>
+
+
+     </script>
 </body>
 </html>

@@ -31,9 +31,7 @@ module.exports.signUp = function(req,res){
   if(req.isAuthenticated()){
     return res.redirect('/users/profile');
   }
-
-
-
+  
     return res.render('user_sign_up',{
         title:'Codeial | Sign Up'
     });
@@ -73,7 +71,7 @@ module.exports.update = async function(req,res){
     }
 
   }catch(err){
-    window.alert('Nikal Lawde!!');
+    window.alert('You are not authorized to update');
   }
 }
 
@@ -89,7 +87,9 @@ module.exports.createSession = function(req,res){
 
 // to signout
 module.exports.destroySession = function(req,res){
-  req.logout();
+  req.logout(function(err){
+    req.flash('error','Something Went Wrong!!');
+  });
   req.flash('success','Logged out successfully!!');
   return res.redirect('/');
 }
