@@ -1,11 +1,12 @@
 <body>
-    <h1>This is codeial / <%= title %> page</h1>
+    <img src="<%=user.avatar%>" alt="<%=user.name%>" width="100">
 
     <!-- to check whether the user who is signed in and the user profile is same or not -->
     <% if(user.id == user_profile.id) {%>
-        <form action="/users/update/<%=user.id%>" method="post">
+        <form action="/users/update/<%=user.id%>" enctype="multipart/form-data"  method="post">
             <input type="text" name="name" placeholder="Enter your name" value="<%=user_profile.name%>">
             <input type="email" name="email" placeholder="Enter email" value="<%=user_profile.email%>">
+            <input type="file" name="avatar" placeholder="Enter profile pic">
             <button type="submit">Update</button>
         </form>
 

@@ -1,4 +1,7 @@
 const User = require('../models/user');
+const fs = require('fs');
+const path = require('path');
+
 // to render profile page
 module.exports.profile = async function(req,res){
   try{
@@ -61,17 +64,47 @@ module.exports.create = async function(req, res) {
 
 // to update user
 module.exports.update = async function(req,res){
-  try{
-    if(req.user.id == req.params.id){ // the user who is signed is same as the user who is trying to update details
-      let user = await User.findByIdAndUpdate(req.params.id,{
-        name:req.body.name,
-        email:req.body.email
-      });
+  // try{
+  //   if(req.user.id == req.params.id){ // the user who is signed is same as the user who is trying to update details
+  //     let user = await User.findByIdAndUpdate(req.params.id,{
+  //       name:req.body.name,
+  //       email:req.body.email
+  //     });
+  //     return res.redirect('back');
+  //   }
+
+  // }catch(err){
+  //   window.alert('You are not authorized to update');
+  // }
+
+  if(req.user.id == req.params.id){
+    try{
+      let user = await User.findById(req.params.id);
+      User.uploadedAvatar(req,res,function(err){ // uploadedAvatar helps us to read data from multipart form
+        if(err){
+          console.log('error in multer',err);
+        }
+        user.name = req.body.name;
+        user.email = req.body.email;
+
+        if(req.file){
+
+          // to check whther the file is uploaded multiple times or not in the avatars
+          if(user.avatar && fs.existsSync(__dirname + '..' + user.avatar)){
+            fs.unlinkSync(path.join(__dirname + '..' + user.avatar));
+          }
+
+          // this is for saving the path of uploaded file into avatar field of user
+          user.avatar = User.avatarPath + '/' + req.file.filename;
+        }
+        user.save();
+        return res.redirect('back');
+      })
+
+    }catch(err){
+      req.flash('unauthorized',err);
       return res.redirect('back');
     }
-
-  }catch(err){
-    window.alert('You are not authorized to update');
   }
 }
 

@@ -25,13 +25,18 @@ app.use(expressLayouts);
 app.use(urlencoded());
 app.use(cookieParser());
 
+// to set style and scripts automatically from assets folder using layouts
+app.use(express.static('./assets'));
+
+// make the uploads folder or route available to browser
+app.use('/uploads',express.static(__dirname+'/uploads'));
+
 
 // to set view engine
 app.set('view engine','ejs'); 
 app.set('views','./views');
 
-// to set style and scripts automatically from assets folder using layouts
-app.use(express.static('./assets'));
+
 app.set('layout extractStyles',true);
 app.set('layout extractScripts',true);
 
@@ -66,6 +71,8 @@ app.use(passport.setAuthenticatedUser);
 // we set the flash message just after the cookie session as flash messages are passsed with every cookie
 const flash = require('connect-flash');
 app.use(flash());
+
+
 
 
 // middleware so that for each req,res cycle we don't need to pass
