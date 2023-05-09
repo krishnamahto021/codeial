@@ -1,12 +1,13 @@
-<li>
+    <li id="post-<%=post._id%>">
     <p>
         <%= post.content %>
-            <%= post.user.name %>
+        <%= post.user.name%>
     </p>
+
     <!-- to show delete button only to logged in user and the user who created -->
     <%if(locals.user.id && locals.user.id==post.user.id) { %>
         <small>
-            <a href="/posts/destroy/<%=post.id%>">X</a>
+            <a class ='delete-post-button' href="/posts/destroy/<%=post._id%>">X</a>
         </small>
         <%}%>
 
@@ -23,14 +24,10 @@
 
                         <div class="post-comments-list">
                             <ul id="post-comments-<%=post._id%>">
-                                <% for(comment of post.comments) {%>
-                                    <%-include('_comment') -%>
-
-                                <% } %>
                             </ul>
 
                         </div>
 
 
             </div>
-</li>
+</li> 

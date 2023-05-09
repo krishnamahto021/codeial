@@ -4,6 +4,7 @@ const User = require('../models/user');
 //populate the user of each post
 module.exports.home = async function (req, res) {
     const posts = await Post.find({})
+    .sort('-createdAt') // to sort the post i.e. the post which posted lateer will be shown first
     .populate('user')
     .populate({
         path:'comments', // schema of post main comments hain
