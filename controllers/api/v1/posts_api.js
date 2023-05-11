@@ -29,27 +29,22 @@ module.exports.destroy = async function (req, res) {
         // .id converts object id into string which makes us easy for comparison
         let post = await Post.findById(req.params.id);
 
-       // if (post.user == req.user.id) { // to authenticate whether the one who is trying to delete post is same as the one who created the post
+        if (post.user == req.user.id) { // to authenticate whether the one who is trying to delete post is same as the one who created the post
             post.deleteOne();
             // post.remove(); is not working
             await Comment.deleteMany({ post: req.params.id });
 
-            // if(req.xhr){
-            //     return res.status(200).json({
-            //         data:{
-            //             post_id:req.params.id
-            //         },
-            //         message:'post deleted'
-            //     });
-            // }
-
-            // req.flash('success', 'Post and its Associated comments deleted successfully!!');
-            // return res.redirect('back');
 
             return res.json(200,{
                 message:'posts and its comments deleted Successfully!!'
             })
-    // }
+        }
+        else{
+            return res.json(401,{
+                message:'You are not authorized to delete this post!!'
+            })
+        }
+    
 
     } catch (err) {
         // console.log('error in destroying post and its comment',err);

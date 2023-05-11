@@ -4,6 +4,9 @@ const app = express(); // calling express server
 const port = 8000;  // defining port for the server
 const db = require('./config/mongoose');
 
+// for passport-jwt strategy
+const passportJwt = require('./config/passport-jwt-strategy');
+
 
 // we require SASS and setup because we want to load it before express server starts
 // when we need to define or simply restart sass again then we need to write npm run scss
