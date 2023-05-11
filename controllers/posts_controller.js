@@ -17,7 +17,7 @@ module.exports.create = async function (req, res) {
             })
         }
 
-        req.flash('success', 'Posted! successfully')
+        req.flash('success', 'Posted! successfully');
         return res.redirect('back');
     } catch (err) {
         // console.log('error in posting');
@@ -47,11 +47,7 @@ module.exports.destroy = async function (req, res) {
                 });
             }
 
- 
-
-
-
-            req.flash('success', 'Post and its associated comments deleted successfully!!')
+            req.flash('success', 'Post and its Associated comments deleted successfully!!')
         }
         return res.redirect('back');
     } catch (err) {
