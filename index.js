@@ -3,24 +3,33 @@ const cookieParser = require('cookie-parser');
 const app = express(); // calling express server
 const port = 8000;  // defining port for the server
 const db = require('./config/mongoose');
+const flash = require('connect-flash');
+// to set layout
+const expressLayouts = require('express-ejs-layouts');
+const { urlencoded } = require('express');
 
-// for passport-jwt strategy
-const passportJwt = require('./config/passport-jwt-strategy');
-
-
-// we require SASS and setup because we want to load it before express server starts
-// when we need to define or simply restart sass again then we need to write npm run scss
+// middleware so that for each req,res cycle we don't need to pass
+const customMware = require('./config/middleware');
 
 // set up the express session and passport
 const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
 
+// for passport-jwt strategy
+const passportJwt = require('./config/passport-jwt-strategy');
+
+// for google-o-Auth
+const passportGoogle = require('./config/passport-google-oauth-2-strategy');
 
 
-// to set layout
-const expressLayouts = require('express-ejs-layouts');
-const { urlencoded } = require('express');
+// we require SASS and setup because we want to load it before express server starts
+// when we need to define or simply restart sass again then we need to write npm run scss
+
+
+
+
+
 app.use(expressLayouts);
 
 
@@ -72,14 +81,13 @@ app.use(passport.session());
 app.use(passport.setAuthenticatedUser);
 
 // we set the flash message just after the cookie session as flash messages are passsed with every cookie
-const flash = require('connect-flash');
+
 app.use(flash());
 
 
 
 
-// middleware so that for each req,res cycle we don't need to pass
-const customMware = require('./config/middleware');
+
 app.use(customMware.setFlash);
 
 
