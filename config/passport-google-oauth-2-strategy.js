@@ -10,7 +10,7 @@ passport.use(new googleStrategy({
     },
     async function (accessToken, refreshToken, profile, done) {
         try {
-            console.log(profile);
+            // console.log(profile);
             let user = await User.findOne({ email: profile.emails[0].value }).exec();
             if (user) {
                 // if user is present set it to req.user

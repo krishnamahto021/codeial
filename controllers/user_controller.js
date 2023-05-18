@@ -11,7 +11,8 @@ module.exports.profile = async function(req,res){
         user_profile:user
     });
   }catch(err){
-
+    console.log('error in rendering profile',err);
+    return;
   }
 }
 
@@ -77,6 +78,7 @@ module.exports.update = async function(req,res){
   //   window.alert('You are not authorized to update');
   // }
 
+  
   if(req.user.id == req.params.id){
     try{
       let user = await User.findById(req.params.id);

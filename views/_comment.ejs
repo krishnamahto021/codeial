@@ -1,7 +1,7 @@
 <li>
     <p>
         <!-- to show delete button only to logged in user and the user who created -->
-        <%if(locals.user.id && locals.user.id==comment.user.id) { %>
+        <%if(locals.user.id && locals.user.id == comment.user.id) { %>
             <small>
                 <a href="/comments/destroy/<%=comment.id%>">X</a>
             </small>
