@@ -21,8 +21,13 @@ module.exports.create = async function (req, res) {
       comment = await comment.populate('user','name email');
 
       //commentsMailer.newComment(comment); // to send mail to user
-      let job = queue.create('emails',comment).save();
-      //console.log(job.id);
+      let job = queue.create('emails',comment).save(function(err){
+        if(err){
+          console.log(`error in KUE ${err}`);
+        }
+        console.log('job enquued',job.id);
+      });
+
 
       req.flash('success', 'Commented Successfully!!');
       return res.redirect('/');

@@ -1,6 +1,8 @@
 const User = require('../models/user');
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
+const resetPasswordMailer = require('../mailers/reset_password_mailer');
 
 // to render profile page
 module.exports.profile = async function(req,res){
@@ -119,6 +121,74 @@ module.exports.createSession = function(req,res){
   return res.redirect('/');
     
 }
+
+
+// to forget or reset password
+
+// show the form for reseting password
+module.exports.forgetPassword = function(req,res){
+  return res.render('forget_password',{
+    title:'Reset Password',
+  });
+}
+
+// to reset the password
+module.exports.resetPassword = async function(req,res){
+  try{
+  let user = await User.findOne({email:req.body.email});
+  if(user){
+    const randomString = crypto.randomBytes(20).toString('hex');
+    user.token = randomString;
+    //console.log(user);
+    user.save();
+    resetPasswordMailer.reset(user,randomString);
+    req.flash('success','Reset email sent');
+    return res.redirect('/');
+     
+  }
+  }catch(err){
+    console.log('error in reseting passwword',err);
+  }
+}
+
+// to verify token
+module.exports.forgetPasswordLoad = async function(req,res){
+  try{
+    let token = req.query.token;
+    console.log(token);
+    //const user = await User.findOne({token:req.query.token}) ;// user with the token exists
+    let user = await User.findOne({token:token});
+    console.log(user.token);
+    if(user){
+      return res.render('reset_password',{
+        title:'reset Password',
+        user_id:user._id // to verify the user
+      });
+    }else{
+      //window.alert('Unauthorized !!');
+      req.flash('error','unauthorized user');
+      return res.redirect('/');
+    }
+
+  }catch(err){
+    console.log('error in verifying token',err);
+  }
+}
+
+// to update password by the user
+module.exports.updatePassword = async function(req,res){
+  try{
+  let user = await User.findById(req.body.user_id);
+  user.password = req.body.password;
+  user.save();
+  console.log(user.password);
+  req.flash('success','Password Updated Successfully!');
+  return res.redirect('/users/sign-in');
+  }catch(err){
+    console.log(`error in updating password ${err}`);
+  }
+}
+
 
 // to signout
 module.exports.destroySession = function(req,res){
