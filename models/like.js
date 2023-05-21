@@ -16,6 +16,8 @@ const likeSchema = new mongoose.Schema({
         required:true,
         enum:['Post','Comment'] // enum restricts it so that the likes can be placed to a post or a comment only 
     }
+},{
+    timestamps:true
 });
 
 const Like = mongoose.model('Like',likeSchema);
