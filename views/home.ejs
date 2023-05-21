@@ -1,6 +1,7 @@
 <!-- <%- include('_header'); %> -->
 <link rel="stylesheet" href="/css/home.css">
-<h1><%= title %>
+<h1>
+    <%= title %>
 </h1>
 <!-- <%- include('_footer'); %> we kept header and footer in layout.ejs so that we can render when ever we want and keep variable part here -->
 
@@ -28,13 +29,16 @@
         <h4>Friends</h4>
         <% for(u of all_users){ %>
             <p>
-                <a href="/users/profile/<%=u.id%>"><%= u.name%></a>
+                <a href="/users/profile/<%=u.id%>">
+                    <%= u.name%>
+                </a>
             </p>
 
 
-        <%}%>
+            <%}%>
     </section>
 
     <%}%>
 
-    <script src="/js/home_posts.js"></script>
+        <script src="/js/comments.js"></script>
+        <script src="/js/home_posts.js"></script>

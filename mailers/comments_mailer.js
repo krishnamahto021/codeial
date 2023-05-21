@@ -15,6 +15,7 @@ module.exports.newComment = function(comment){
             console.log(`error in sending mail ${err}`);
             return;
         }
-        console.log('Message Sent!!!',info);
+        //console.log('Message Sent!!!',info);
+        return;
     })
 }

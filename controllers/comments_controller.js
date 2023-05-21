@@ -5,36 +5,48 @@ const queue = require('../config/kue');
 const commentEmailWorker = require('../workers/comment_email_worker');
 
 module.exports.create = async function (req, res) {
-  try{  
-  let post = await Post.findById(req.body.post);
-  if (post) {
-    let comment = await Comment.create({
-      content: req.body.content,
-      post: req.body.post,
-      user: req.user._id
-    });
+  try {
+    let post = await Post.findById(req.body.post);
+    if (post) {
+      let comment = await Comment.create({
+        content: req.body.content,
+        post: req.body.post,
+        user: req.user._id
+      });
 
-    // if comment is created we update it into data base and save it
+      // if comment is created we update it into data base and save it
       post.comments.push(comment);
       // await  comment.save();
       post.save();
-      comment = await comment.populate('user','name email');
+
+
+
+      comment = await comment.populate('user', 'name email');
 
       //commentsMailer.newComment(comment); // to send mail to user
-      let job = queue.create('emails',comment).save(function(err){
-        if(err){
+      let job = queue.create('emails', comment).save(function (err) {
+        if (err) {
           console.log(`error in KUE ${err}`);
         }
-        console.log('job enquued',job.id);
+        //console.log('job enquued',job.id);
       });
+
+      if (req.xhr) {
+        return res.status(200).json({
+          data: {
+            comment: comment
+          },
+          message: 'comment created!!'
+        })
+      };
 
 
       req.flash('success', 'Commented Successfully!!');
       return res.redirect('/');
     }
-  }catch(err){
-    console.log('error in creating comments',err);
-    req.flash('error',err);
+  } catch (err) {
+    console.log('error in creating comments', err);
+    req.flash('error', err);
     return;
   }
 }
@@ -65,10 +77,18 @@ module.exports.destroy = async function (req, res) {
 
     if (comment.user == req.user.id) {
       const postId = comment.post;
-
-      await comment.deleteOne();
-
+       comment.deleteOne();
       const post = await Post.findByIdAndUpdate(postId, { $pull: { comments: req.params.id } });
+
+      if (req.xhr) {
+        return res.status(200).json({
+          data: {
+            comment_id: req.params.id
+          },
+          message: 'comment deleted via ajax'
+        });
+      }
+
 
       req.flash('success', 'Comment deleted successfully!!');
       return res.redirect('back');

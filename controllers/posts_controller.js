@@ -47,7 +47,7 @@ module.exports.destroy = async function (req, res) {
                 });
             }
 
-            req.flash('success', 'Post and its Associated comments deleted successfully!!')
+            req.flash('success', 'Post and its Associated comments deleted successfully!!');
         }
         return res.redirect('back');
     } catch (err) {

@@ -1,9 +1,9 @@
-<li>
+<li id="comment-<%=comment._id%>">
     <p>
         <!-- to show delete button only to logged in user and the user who created -->
         <%if(locals.user.id && locals.user.id == comment.user.id) { %>
             <small>
-                <a href="/comments/destroy/<%=comment.id%>">X</a>
+                <a class="delete-comment-button" href="/comments/destroy/<%=comment.id%>">X</a>
             </small>
             <%}%>
                 <%= comment.content%>
