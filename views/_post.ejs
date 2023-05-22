@@ -4,6 +4,17 @@
         <%= post.user.name%>
     </p>
 
+    <!-- change : adding like toggle tag -->
+    <small>
+        <%if(locals.user){%>
+            <a class="toggle-like-button" data-likes="<%=post.likes.length%>" href="/likes/toggle/?id=<%=post._id%>&type=Post">
+                <%=post.likes.lenght%>Likes
+            </a>
+        <%}else{%>
+            <%=post.likes.length%>
+        <%}%>
+    </small>
+
     <!-- to show delete button only to logged in user and the user who created -->
     <%if(locals.user.id && locals.user.id==post.user.id) { %>
         <small>

@@ -10,8 +10,11 @@ module.exports.home = async function (req, res) {
         path:'comments', // schema of post main comments hain
         populate:{
             path:'user' // schema of post main user hain
+        },
+        populate:{ // change : populating likes for comments of post
+            path:'likes'
         }
-    })
+    }).populate('likes'); // change : populating likes for post 
 
     try {
         let users = await User.find({});
