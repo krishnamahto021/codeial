@@ -24,6 +24,7 @@ module.exports.toggleLike = async function(req, res){
             onModel: req.query.type,
             user: req.user._id
         })
+        // console.log(existingLike);
 
         // if a like already exists then delete it
         if (existingLike){

@@ -9,6 +9,7 @@ router.use('/users',require('./users')); // to access all the controller when ro
 router.use('/posts',require('./posts'));
 router.use('/comments',require('./comments'));
 router.use('/likes',require('./likes'));
+router.use('/friends',require('./friends'));
 
 // to use api
 router.use('/api',require('./api'));

@@ -25,7 +25,13 @@ const userSchema = new mongoose.Schema({
     token:{
         type:String,
         default:''
-    }
+    },
+    friendship:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'User'
+        }
+    ]
 },{timestamps:true});
 
 // multer storage configuration for files

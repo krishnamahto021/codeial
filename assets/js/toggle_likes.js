@@ -13,11 +13,10 @@ class ToggleLike{
             
             // this is a new way of writing ajax which you might've studied, it looks like the same as promises
             $.ajax({
-                type: 'GET',
+                type: 'post',
                 url: $(self).attr('href'),
             })
             .done(function(data) {
-                console.log(data.data);
                 let likesCount = parseInt($(self).attr('data-likes'));
                 console.log(likesCount);
                 if (data.data.deleted == true){

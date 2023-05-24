@@ -12,7 +12,10 @@
 
     <%}else{%>
         <p><%=user_profile.name%></p>
-        <p><%=user_profile.email%></p>        
+        <p><%=user_profile.email%></p>
+        <a href="/friends/toggle/<%=user_profile._id%>" id="friendship-button" >Add Friend</a>  
+     
     <%}%>
 
 </body>
+<script src="/js/toggle_friendship.js"></script>
