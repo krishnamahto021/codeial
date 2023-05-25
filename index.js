@@ -1,15 +1,28 @@
 const express = require('express');// require library
+
+// to set up the corse for using chat and we have used this is the chat_sockets.js
+const cors = require('cors');
+
 const cookieParser = require('cookie-parser');
 const app = express(); // calling express server
 const port = 8000;  // defining port for the server
 const db = require('./config/mongoose');
 const flash = require('connect-flash');
+
+
+
 // to set layout
 const expressLayouts = require('express-ejs-layouts');
 const { urlencoded } = require('express');
 
 // middleware so that for each req,res cycle we don't need to pass
 const customMware = require('./config/middleware');
+
+// to set mongo store
+const MongoStore = require('connect-mongo');
+
+// to set node sass
+// const sassMiddleware = require('node-sass-middleware');
 
 // set up the express session and passport
 const session = require('express-session');
@@ -29,8 +42,18 @@ const passportGoogle = require('./config/passport-google-oauth-2-strategy');
 
 
 
+// using cors to setup the chatbox
+// app.use(cors());
+  
 
 app.use(expressLayouts);
+
+// setup the chat server to be used with socket.io
+const chatServer = require('http').Server(app);
+const chatSockets = require('./config/chat_sockets').chatSockets(chatServer);
+chatServer.listen(3000);
+console.log('chat server is listening on port 3000');
+
 
 
 // to use cookie parser
@@ -53,8 +76,7 @@ app.set('layout extractStyles',true);
 app.set('layout extractScripts',true);
 
 
-// to set mongo store
-const MongoStore = require('connect-mongo');
+
 
 // setup the session using mongo store
 app.use(session({

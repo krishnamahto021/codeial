@@ -1,4 +1,4 @@
-console.log(`inside the toggle friendship js claass`);
+// console.log(`inside the toggle friendship js claass`);
 $(document).ready(function(){
     $('#friendship-button').click(function(e){
         e.preventDefault();
