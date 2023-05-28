@@ -106,18 +106,10 @@ app.use(passport.setAuthenticatedUser);
 
 app.use(flash());
 
-
-
-
-
 app.use(customMware.setFlash);
-
-
 
 // use route
 app.use('/',require('./routes')); // any request coming to the web will go to routes
-
-
 
 app.listen(port,function(err){
     if(err){
