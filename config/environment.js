@@ -19,10 +19,28 @@ const development = {
     jwt_secret_or_key:'codeial'
 }
 
+
 const production ={
     name:'production',
+    asset_path:process.env.CODEIAL_ASSET_PATH,
+    session_cookie_key:process.env.session_cookie_key,
+    db:process.env.db,
+    smtp:{
+        service:process.env.smtp_service,
+        host:process.env.smtp_host,
+        port:587,
+        secure:false,
+        auth:({
+            user:process.env.smtp_auth_user,
+            pass:process.env.smtp_auth_pass
+        })
+    },
+    google_clientID:process.env.google_clientID,
+    google_clientSecret:process.env.google_clientSecret,
+    google_callbackURL:process.env.google_callbackURL,
+    jwt_secret_or_key:process.env.jwt_secret_or_key 
 
 
 }
 
-module.exports = development;
+module.exports = eval(process.env.CODEIAL_ENVIRONMENT) == undefined ? development :eval(process.env.CODEIAL_ENVIRONMENT);
