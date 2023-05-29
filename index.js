@@ -1,5 +1,6 @@
 const express = require('express');// require library
-const env = require('./config/environment');
+const env = require('./config/environment');// to set the enviornment variable for dev and prod mode
+const logger = require('morgan');
 
 // to set up the corse for using chat and we have used this is the chat_sockets.js
 const cors = require('cors');
@@ -66,6 +67,9 @@ app.use(express.static(env.asset_path));
 
 // make the uploads folder or route available to browser
 app.use('/uploads',express.static(__dirname+'/uploads'));
+
+// to use morgan or logger
+app.use(logger(env.morgan.mode,env.morgan.options));
 
 
 // to set view engine
