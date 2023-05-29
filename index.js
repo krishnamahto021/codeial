@@ -1,4 +1,5 @@
 const express = require('express');// require library
+const env = require('./config/environment');
 
 // to set up the corse for using chat and we have used this is the chat_sockets.js
 const cors = require('cors');
@@ -61,7 +62,7 @@ app.use(urlencoded());
 app.use(cookieParser());
 
 // to set style and scripts automatically from assets folder using layouts
-app.use(express.static('./assets'));
+app.use(express.static(env.asset_path));
 
 // make the uploads folder or route available to browser
 app.use('/uploads',express.static(__dirname+'/uploads'));
@@ -80,8 +81,8 @@ app.set('layout extractScripts',true);
 
 // setup the session using mongo store
 app.use(session({
-    name:'codeial',
-    secret:'somethingblah',
+    name:env.name,
+    secret:env.session_cookie_key,
     saveUninitialized:false,
     resave:false,
     cookie:{
