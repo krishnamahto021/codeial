@@ -39,26 +39,23 @@
         <% if(flash.success && flash.success.length>0){%>
             new Noty({
                 theme:'relax',
-                text:'<%=flash.success%>',
+                text:'<%=flash.success[0]%>',
                 type:'success',
                 layout:'topRight',
-                timout:1500
+                timeout:1500
             }).show();    
         <% } %>
 
         <%if(flash.error && flash.error.length>0){%>
             new Noty({
                 theme:'relax',
-                type:'<%=flash.error%>',
+                text:'<%=flash.error[0]%>',
                 type:'error',
                 layout:'topRight',
                 timeout:1500
-
             }).show();
 
         <%}%>
-
-
-     </script>
+</script>
 </body>
 </html>
