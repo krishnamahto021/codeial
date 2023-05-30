@@ -1,18 +1,20 @@
-// const gulp = require('gulp');
-// // const sass = require('gulp-sass'); // we have not used sass so we removed sass
-// const cssnano = require('gulp-cssnano');
-// const rev = require('gulp-rev');
-// const uglify = require('gulp-uglify');
-// const imagemin = require('gulp-imagemin');
+const gulp = require('gulp');
+const sass = require('gulp-sass'); // we have not used sass so we removed sass
+const cssnano = require('gulp-cssnano');
+const rev = require('gulp-rev');
+const uglify = require('gulp-uglify');
+const imagemin = require('gulp-imagemin');
 
-// require will not work because of ES6 so we use import instead moreover we also changed the package.json just befor debug "type":"module" so that import can work
+// require will not work because of ES6 so we use import instead moreover we also changed the package.json just befor debug "type":"module" so that import can work but issuw with this is that the server will not start as it treats every file as es module so its better to install gulp-imagemin@6.0.0
 
-import gulp from 'gulp';
-import cssnano from 'gulp-cssnano';
-import rev from 'gulp-rev';
-import uglify from 'gulp-uglify';
-import imagemin  from 'gulp-imagemin';
-import del from 'delete';
+// npm install gulp-imagemin@6.0.0
+
+// import gulp from 'gulp';
+// import cssnano from 'gulp-cssnano';
+// import rev from 'gulp-rev';
+// import uglify from 'gulp-uglify';
+// import imagemin  from 'gulp-imagemin';
+// import del from 'delete';
 
 
 
