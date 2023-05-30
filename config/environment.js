@@ -38,7 +38,6 @@ const development = {
     }
 }
 
-
 const production ={
     name:'production',
     asset_path:process.env.CODEIAL_ASSET_PATH,
@@ -67,5 +66,5 @@ const production ={
 
 
 }
-
-module.exports = eval(process.env.CODEIAL_ENVIRONMENT) == undefined ? development :eval(process.env.CODEIAL_ENVIRONMENT);
+// console.log(development.jwt_secret_or_key);
+module.exports = eval(process.env.CODEIAL_ENVIRONMENT_PRODUCTION) == undefined ? development :eval(process.env.CODEIAL_ENVIRONMENT_PRODUCTION);
