@@ -1,0 +1,14 @@
+.footer-bar {
+  background-color: rgba(128, 128, 128, 0.834);
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  top: 100vw;
+  font-weight: bold;
+  margin-top: 800px;
+  margin-bottom: 4px;
+}
+.footer-bar .left-end {
+  display: flex;
+}

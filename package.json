@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "This is all in one social app for coders",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "npx nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -17,10 +18,17 @@
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
+    "delete": "^1.1.0",
     "ejs": "^3.1.8",
     "express": "^4.18.2",
     "express-ejs-layouts": "^2.5.1",
     "express-session": "^1.17.3",
+    "gulp": "^4.0.2",
+    "gulp-cssnano": "^2.1.3",
+    "gulp-imagemin": "^8.0.0",
+    "gulp-rev": "^9.0.0",
+    "gulp-sass": "^5.1.0",
+    "gulp-uglify": "^3.0.2",
     "i": "^0.3.7",
     "jsonwebtoken": "^9.0.0",
     "kue": "^0.11.6",
@@ -37,6 +45,7 @@
     "socket.io": "^4.6.1"
   },
   "devDependencies": {
-    "cross-env": "^7.0.3"
+    "cross-env": "^7.0.3",
+    "esm": "^3.2.25"
   }
 }
