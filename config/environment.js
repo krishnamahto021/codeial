@@ -66,5 +66,8 @@ const production ={
 
 
 }
-// console.log(development.jwt_secret_or_key);
-module.exports = eval(process.env.CODEIAL_ENVIRONMENT_PRODUCTION) == undefined ? development :eval(process.env.CODEIAL_ENVIRONMENT_PRODUCTION);
+if(process.env.NODE_ENV === 'production'){
+    module.exports = production;
+}else{
+    module.exports = development;
+}

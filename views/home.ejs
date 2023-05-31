@@ -1,6 +1,6 @@
 <!-- <%- include('_header'); %> -->
-<link rel="stylesheet" href="/css/home.css">
-<link rel="stylesheet" href="/css/chat_box.css">
+<link rel="stylesheet" href="<%=assetPath('css/home.css')%>">
+<link rel="stylesheet" href="<%=assetPath('css/chat_box.css')%>">
 <h1>
     <%= title %>
 </h1>
@@ -45,11 +45,11 @@
 
     
 
-        <script src="/js/comments.js"></script>
-        <script src="/js/home_posts.js"></script>
+        <script src="<%=assetPath('js/comments.js')%>"></script>
+        <script src="<%=assetPath('js/home_posts.js')%>"></script>
 
 <!-- CHANGE :: import the script file for toggle likes, also run it over for the already present posts and comments on the page -->
-<script src="js/toggle_likes.js"></script>
+<script src="<%=assetPath('js/toggle_likes.js')%>"></script>
 <script>
     $('.toggle-like-button').each(function(){
         let self = this;
@@ -57,10 +57,10 @@
     });
 </script>
 
-<script src="/js/toggle_friendship.js"></script>
+<script src="<%=assetPath('js/toggle_friendship.js')%>"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.1/socket.io.min.js" integrity="sha512-AI5A3zIoeRSEEX9z3Vyir8NqSMC1pY7r5h2cE+9J6FLsoEmSSGLFaqMQw8SWvoONXogkfFrkQiJfLeHLz3+HOg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="/js/chat_engine.js"></script>
+<script src="<%=assetPath('js/chat_engine.js')%>"></script>
 
 <%if(locals.user){%>
 <script>

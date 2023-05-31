@@ -1,14 +1,12 @@
 const express = require('express');// require library
 const env = require('./config/environment');// to set the enviornment variable for dev and prod mode
 const logger = require('morgan');
-console.log(env)
 
 // to set up the corse for using chat and we have used this is the chat_sockets.js
 const cors = require('cors');
 
 const cookieParser = require('cookie-parser');
 const app = express(); // calling express server
-
 require('./config/views_helpers')(app);
 
 const port = 8000;  // defining port for the server
